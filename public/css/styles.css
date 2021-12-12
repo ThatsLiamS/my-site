@@ -81,8 +81,10 @@ h3 {
     letter-spacing: 1px;
     text-transform: uppercase;
 }
-h4 {
+#skills h3 {
     font: 900 13px "Titillium Web",serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 p {
     line-height: 24px;
@@ -231,7 +233,7 @@ li {
     margin-bottom: 50px;
 }
 
-.skill-outer h4 span {
+.skill-outer h3 span {
     background: #fff none repeat scroll 0 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     color: #a0a0a0;
@@ -240,7 +242,7 @@ li {
     padding: 2px 6px;
     position: relative;
 }
-.skill-outer h4 span::before {
+.skill-outer h3 span::before {
     right: 100%;
 	top: 50%;
 	border: solid transparent;
