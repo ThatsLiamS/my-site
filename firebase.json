@@ -1,0 +1,28 @@
+{
+	"hosting": {
+		"site": "my-site-main",
+		"public": "public",
+		"ignore": [
+			"firebase.json",
+			"**/.*",
+			"**/node_modules/**"
+		],
+		"redirects": [
+			{ "source": "/discord", "destination": "https://discord.gg/2je9aJynqt", "type": 301 },
+			{ "source": "/discord/**", "destination": "https://discord.gg/2je9aJynqt", "type": 301 },
+
+			{ "source": "/automod", "destination": "https://automod.liamskinner.co.uk/invite", "type": 302 },
+			{ "source": "/coinflipper", "destination": "https://coinflipper.pages.dev/", "type": 302 },
+
+			{ "source": "/twitter", "destination": "https://twitter.com/ThatsLiamS", "type": 301 },
+			{ "source": "/twitter/**", "destination": "https://twitter.com/ThatsLiamS", "type": 301 },
+
+			{ "source": "/donate", "destination": "https://paypal.me/ThatsLiamS", "type": 301 },
+			{ "source": "/donate/**", "destination": "https://paypal.me/ThatsLiamS", "type": 301 },
+
+			{ "source": "/github", "destination": "https://github.com/ThatsLiamS", "type": 301 },
+			{ "source": "/github/**", "destination": "https://github.com/ThatsLiamS", "type": 301 }
+		],
+		"cleanUrls": true
+	}
+}
