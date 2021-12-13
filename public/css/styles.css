@@ -104,12 +104,11 @@ li {
     margin-bottom: 50px;
 }
 .section-title h2::after {
-   background: #1d93e4 none repeat scroll 0 0;
+    background: #1d93e4 none repeat scroll 0 0;
     content: "";
     display: table;
     height: 2px;
-    left: 28px;
-    position: absolute;
+    margin-left: 28px;
     width: 40px;
 }
 .section-title span {
@@ -195,7 +194,10 @@ li {
 }
 
 
-
+.sidebar .nav {
+    text-align: center;
+    margin: auto;
+}
 .sidebar .nav li {
     font: 900 13px "Titillium Web",serif;
     padding: 10px 0;
@@ -206,6 +208,7 @@ li {
     display: inline-block;
     padding: 0;
     transition: all 0.1s linear 0s;
+    text-align: center;
 }
 .sidebar .nav li a:hover, .sidebar .nav li.active a {
     color: #1d93e4;
@@ -261,7 +264,7 @@ li {
 }
 .progress, .progress-bar {
     box-shadow: none;
-    height: 6px;
+    height: 10px;
 }
 .progress {
     background: #d2d2d2 none repeat scroll 0 0;
@@ -270,6 +273,10 @@ li {
 }
 .progress-bar {
     background: #1d93e4 none repeat scroll 0 0;
+}
+.progress-bar-striped {
+    background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-size: 1rem 1rem;
 }
 .services-background {
     margin-bottom: -30px;
@@ -412,4 +419,15 @@ button.mfp-close:hover {
 	text-align: center;
 	transition: all 300ms ease 0s;
 	width: 23px;
+}
+
+.button {
+    background-color: #1d93e4;
+    border-radius: 50px;
+    font-family: Titillium Web;
+    text-transform: uppercase;
+    color: #ffffff;
+    white-space: nowrap;
+    padding: 6px 16px;
+    font-size: 13px;
 }
