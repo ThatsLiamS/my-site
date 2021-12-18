@@ -46,9 +46,6 @@
     body {
         background-color: #fff;
     }
-    .fixed-left-contact, .fixed-right-socials, .right-br, .left-br {
-        display: none;
-    }
     .container {
         padding: 0 30px;
     }
@@ -81,6 +78,7 @@
     }
     .about-background, .projects-background, .services-background, .skill-outer:last-child {
         margin: 0;
+        margin: auto;
     }
     .skill-outer {
         margin-bottom: 30px;
