@@ -9,6 +9,7 @@
 	font-style: normal;
 }
 
+/* Icons */
 .icon_easel, .icon_globe, .icon_globe-2, .icon_pens, .icon_currency {
 	font-family: 'ElegantIcons';
 	font-style: normal;
@@ -18,7 +19,6 @@
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 }
-
 .icon_globe:before {
 	content: "\e0e2";
 }
@@ -28,46 +28,9 @@
 .icon_pens:before {
 	content: "\e104";
 }
-
 .icon_currency:before {
 	content: "\e0f3";
 }
 .icon_easel:before {
 	content: "\e0e9";
-}
-
-.glyph {
-	float: left;
-	text-align: center;
-	padding: .75em;
-	margin: .4em 1.5em .75em 0;
-	width: 6em;
-	text-shadow: none;
-}
-.glyph_big {
-	font-size: 128px;
-	color: #59c5dc;
-	float: left;
-	margin-right: 20px;
-}
-.glyph div {
-	padding-bottom: 10px;
-}
-.glyph input {
-	font-family: consolas, monospace;
-	font-size: 12px;
-	width: 100%;
-	text-align: center;
-	border: 0;
-	box-shadow: 0 0 0 1px #ccc;
-	padding: .2em;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-.centered {
-	margin-left: auto;
-	margin-right: auto;
-}
-.glyph .fs1 {
-	font-size: 2em;
 }
