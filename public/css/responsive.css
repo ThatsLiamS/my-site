@@ -43,8 +43,8 @@
     }
 }
 @media only screen and (max-width: 767px) {
-    body {
-        background-color: #fff;
+    .copyright {
+        text-align: center;
     }
     .container {
         padding: 0 30px;

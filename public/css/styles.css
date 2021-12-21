@@ -398,10 +398,13 @@ button.mfp-close:hover {
     text-transform: uppercase;
 }
 
-.copyright {
+#copyright {
     font-size: 13px;
     padding: 30px 0;
     margin-top: 50px;
+}
+.copyright {
+    text-align: left;
 }
 .red {
     color: #f00;
