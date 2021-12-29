@@ -36,7 +36,7 @@
   		<link rel="preload" href="js/scripts.js" as="script">
 
 	</head>
-	<body>
+	<body data-bs-spy="scroll" data-bs-target="#navbar">
 
 		<!-- Sidebar -->
 		<div class="container">
@@ -45,14 +45,14 @@
 					<div class="col-md-2 sidebarWrapper">
 						<img class="user-pic" src="https://assets.liamskinner.co.uk/avatars/thatsliams.jpg" alt="profile picture">
 	
-						<nav class="menu">
+						<nav id="navbar" class="menu">
 							<div class="toggle-btn">
 								<span class="lines"></span>
 							</div>
 
 							<ul class="nav flex-column">
 								<li class="nav-item">
-									<a class="nav-link" href="#about">About me</a>
+									<a class="nav-link active" href="#about">About me</a>
 								</li>
 								<li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
 								<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>

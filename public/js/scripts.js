@@ -1,10 +1,6 @@
 $(() => {
 	'use strict';
 
-	$(window).load(() => {
-		$('body').addClass('loaded');
-	});
-
 	const nav = $('.nav');
 	const lines = $('.toggle-btn');
 
