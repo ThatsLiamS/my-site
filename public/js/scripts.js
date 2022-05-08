@@ -1,30 +1,26 @@
-$(() => {
-	'use strict';
+'use-strict'
 
-	const nav = $('.nav');
-	const lines = $('.toggle-btn');
+const nav = document.querySelector('.nav');
+const lines = document.querySelector('.toggle-btn');
 
-	lines.on('click', (n) => {
-		nav.hasClass('show-nav') ? nav.removeClass('show-nav') : nav.addClass('show-nav');
-		n.stopPropagation();
-        
-        lines.hasClass('toggle-close') ? lines.removeClass('toggle-close') : lines.addClass('toggle-close');
-	}),
+document.querySelector('.toggle-btn').addEventListener('click', (event) => {
+	nav.classList.contains('show-nav') ? nav.classList.remove('show-nav') : nav.classList.add('show-nav');
+	event.stopPropagation();
 
+	lines.classList.contains('toggle-close') ? lines.classList.remove('toggle-close') : lines.classList.add('toggle-close');
+});
 
-	$(document).on('click', () => {
-		nav.hasClass('show-nav') && nav.removeClass('show-nav'), lines.hasClass('toggle-close') && lines.removeClass('toggle-close');
-	}),
+document.addEventListener('click', () => {
+	nav.classList.contains('show-nav') && nav.classList.remove('show-nav');
+	lines.classList.contains('toggle-close')  && lines.classList.remove('toggle-close');
+});
 
-	$(window).on('load resize', () => {
+const linesPosition = document.querySelector('.toggle-btn').getBoundingClientRect().top + window.scrollY;
+window.addEventListener('scroll', () => {
+	const WindowPosition = document.querySelector('html').scrollTop;
 
-		$(window).width() < 768 && (lines.wrap('<div class="toggle-placeholder"></div>'), $('.toggle-placeholder').height(lines.outerHeight()));
-
-		const o = $('.toggle-btn').offset().top;
-		$(window).on('scroll', () => {
-			const s = $(window).scrollTop();
-			s >= o ? (lines.addClass('fixed'), nav.addClass('stickyNav')) : (lines.removeClass('fixed'), nav.removeClass('stickyNav'));
-		});
-	});
+	WindowPosition >= linesPosition ?
+		(lines.classList.add('fixed'), nav.classList.add('stickyNav')) :
+		(lines.classList.remove('fixed'), nav.classList.remove('stickyNav'));
 
 });
