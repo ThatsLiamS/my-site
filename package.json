@@ -15,5 +15,8 @@
 	"bugs": {
 		"url": "https://github.com/ThatsLiamS/my-site/issues"
 	},
-	"homepage": "https://github.com/ThatsLiamS/my-site#readme"
+	"homepage": "https://github.com/ThatsLiamS/my-site#readme",
+	"devDependencies": {
+		"eslint": "^8.15.0"
+	}
 }
