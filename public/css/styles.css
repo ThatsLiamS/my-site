@@ -10,10 +10,10 @@ body {
 	float: left;
 	line-height: 28px
 }
-a{
+a {
 	color:#232323;
 }
-a:hover{
+a:hover {
 	color:#1d93e4;
 }
 a, a:focus, a:hover {
@@ -129,8 +129,8 @@ h4 {
 	cursor: pointer;
 	height: 60px;
 	line-height: 60px;
-	margin: 0;
-	width: 100%;
+	margin: auto 0;
+	width: auto;
 	z-index: 998;
 }
 .lines, .lines::after, .lines::before {
@@ -307,7 +307,7 @@ h4 {
 	padding: 0;
 }
 .projects-box {
-	margin-bottom: 30px;
+	margin-bottom: 55px;
 }
 .projects-box:last-child {
 	margin: 0;
