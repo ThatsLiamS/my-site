@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+package-lock.json
+
+# dotenv environment variables file
+.env
+
+# Hosting Config
+.firebase/
+.firebaserc
+firebase.json
+
+# Temporary Source Code
+public/
+src/

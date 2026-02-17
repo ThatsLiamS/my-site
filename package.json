@@ -1,0 +1,30 @@
+{
+	"name": "my-site",
+	"version": "2.0.0",
+	"description": "https://www.liamskinner.co.uk",
+	"main": "src/",
+	"scripts": {
+		"build": "node src/generator.js",
+		"test": "npm run build && firebase emulators:start",
+		"deploy": "npm run build && firebase deploy"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ThatsLiamS/my-site.git"
+	},
+	"author": "Liam Skinner",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ThatsLiamS/my-site/issues"
+	},
+	"homepage": "https://github.com/ThatsLiamS/my-site#readme",
+	"dependencies": {
+		"clean-css": "^5.3.3",
+		"glob": "^13.0.4",
+		"html-minifier-terser": "^7.2.0",
+		"terser": "^5.46.0"
+	},
+	"devDependencies": {
+		"eslint": "^10.0.0"
+	}
+}
