@@ -2,10 +2,10 @@
 	"name": "my-site",
 	"version": "2.0.0",
 	"description": "https://www.liamskinner.co.uk",
-	"main": "src/",
+	"main": "/",
 	"scripts": {
 		"build": "node src/generator.js",
-		"test": "npm run build && firebase emulators:start",
+		"start": "npm run build && firebase emulators:start",
 		"deploy": "npm run build && firebase deploy"
 	},
 	"repository": {
@@ -25,6 +25,8 @@
 		"terser": "^5.46.0"
 	},
 	"devDependencies": {
-		"eslint": "^10.0.0"
+		"@eslint/js": "^10.0.1",
+		"eslint": "^10.0.0",
+		"globals": "^17.3.0"
 	}
 }

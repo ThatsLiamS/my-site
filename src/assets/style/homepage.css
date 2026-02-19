@@ -1,0 +1,53 @@
+.profile-header { text-align: center; padding-bottom: 40px; }
+.profile-img {
+	width: 150px; height: 150px;
+	background-color: var(--light-blue-bg);
+	border-radius: 50%;
+	margin: 0 auto 20px;
+	border: 4px solid var(--white);
+	box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+	background-image: url('./../images/icon.webp');
+	background-size: cover;
+	background-position: center;
+}
+.profile-header h1 { font-size: 2rem; margin-bottom: 5px; }
+.timeline-item { display: flex; gap: 16px; align-items: flex-start; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
+.timeline-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+.item-logo { width: 56px; height: 56px; object-fit: contain; background-color: var(--white); flex-shrink: 0; border-radius: 4px; }
+.item-details { flex-grow: 1; }
+
+.career-toggle-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1rem;
+}
+
+.toggle-container {
+	display: inline-flex;
+	background: #f0f2f5;
+	padding: 4px;
+	border-radius: 99px;
+	border: 1px solid #ddd;
+}
+
+.toggle-btn {
+	background: transparent;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 99px;
+	cursor: pointer;
+	font-weight: 600;
+	color: #666;
+	font-size: 0.9rem;
+	transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+	color: #333;
+}
+
+.toggle-btn.active {
+	background: #fff;
+	color: #000;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}

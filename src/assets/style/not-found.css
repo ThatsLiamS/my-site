@@ -1,0 +1,26 @@
+.error-card {
+	text-align: center;
+	max-width: 500px;
+	width: 100%;
+	padding: 60px 40px;
+}
+.error-card h1 { font-size: 6rem; line-height: 1; margin-bottom: 10px; font-weight: 800; color: var(--primary-blue); }
+.error-card h2 { text-align: center; display: inline-block; color: black; }
+.error-card p { margin-bottom: 30px; color: rgb(102, 102, 102); }
+.compass-icon {
+	width: 64px; height: 64px; margin-bottom: 20px;
+	color: var(--primary-blue);
+	animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+	0%, 100% { transform: translateY(0px); }
+	50% { transform: translateY(-10px); }
+}
+
+body.full-height {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}

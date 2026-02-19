@@ -1,4 +1,4 @@
-# www.liamskinner.co.uk
+# Portfolio Website
 
 > The source code for my personal website, hosted at [www.liamskinner.co.uk](https://www.liamskinner.co.uk).
 
@@ -40,7 +40,7 @@ npm install
 ├── src/
 │   ├── content/        # Writeups and JSON data
 │   ├── templates/      # HTML logic for the custom SSG
-│   └── assets/         # CSS, Images, and Fonts
+│   └── assets/         # CSS, JS, and Images
 ├── public/             # Compiled output (ignored by Git)
 └── .github/            # CI/CD and Community files
 ```

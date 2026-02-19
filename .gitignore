@@ -1,16 +1,20 @@
-# Dependency directories
+# Dependencies & Lockfiles
 node_modules/
 jspm_packages/
 package-lock.json
 
-# dotenv environment variables file
+# Local Environment & Secrets
 .env
 
-# Hosting Config
+# Firebase Hosting Configuration
 .firebase/
 .firebaserc
 firebase.json
+*.log
 
-# Temporary Source Code
+# Generated Build Output (Static Site)
 public/
-src/
+
+# Raw Content & Assets (Excluded from Repo)
+src/content/
+src/assets/images/
