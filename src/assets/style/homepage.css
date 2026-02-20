@@ -15,39 +15,3 @@
 .timeline-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
 .item-logo { width: 56px; height: 56px; object-fit: contain; background-color: var(--white); flex-shrink: 0; border-radius: 4px; }
 .item-details { flex-grow: 1; }
-
-.career-toggle-wrapper {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 1rem;
-}
-
-.toggle-container {
-	display: inline-flex;
-	background: #f0f2f5;
-	padding: 4px;
-	border-radius: 99px;
-	border: 1px solid #ddd;
-}
-
-.toggle-btn {
-	background: transparent;
-	border: none;
-	padding: 8px 20px;
-	border-radius: 99px;
-	cursor: pointer;
-	font-weight: 600;
-	color: #666;
-	font-size: 0.9rem;
-	transition: all 0.2s ease;
-}
-
-.toggle-btn:hover {
-	color: #333;
-}
-
-.toggle-btn.active {
-	background: #fff;
-	color: #000;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-}

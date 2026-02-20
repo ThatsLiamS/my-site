@@ -10,42 +10,26 @@ const { headTag, navTag, footerTag } = require('./lib/components');
  * @function
  * @summary Generates the HTML for the profile header and the 'About Me' section.
  *
- * @param {Object} biography - An object containing arrays of biographical text for 'outdoor' and 'cyber' categories.
+ * @param {Array<string>} biography - An array of biographical text.
  * @returns {string} The formatted HTML string for the introductory sections.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
  */
 const renderIntro = (biography) => {
-	const rawbioOutdoor = biography?.outdoor || [];
-	const rawbioCyber = biography?.cyber || [];
-
-	const bioOutdoor = rawbioOutdoor.map(e => escapeHTML(e));
-	const bioCyber = rawbioCyber.map(e => escapeHTML(e));
+	const rawBio = biography || [];
+	const formattedBio = rawBio.map(e => escapeHTML(e));
 
 	return `
 	<header class="card profile-header">
 		<div class="profile-img"></div>
-
 		<h1>${escapeHTML(globalContent.site.author)}</h1>
-
-		<div class="career-toggle-wrapper">
-			<div class="toggle-container">
-				<button class="toggle-btn" data-target="cyber">Cyber</button>
-				<button class="toggle-btn active" data-target="outdoor">Outdoor</button>
-			</div>
-		</div>
 	</header>
 	<section id="about" class="card">
 		<h2>About Me</h2>
 		
-		<div class="dynamic-content" data-category="outdoor" class="bio-container">
+		<div class="bio-container">
 			<p>
-				${bioOutdoor.join('</p><p>')}
-			</p>
-		</div>
-		<div class="dynamic-content" data-category="cyber" class="bio-container">
-			<p>
-				${bioCyber.join('</p><p>')}
+				${formattedBio.join('</p><p>')}
 			</p>
 		</div>
 	</section>
@@ -56,7 +40,7 @@ const renderIntro = (biography) => {
  * @function
  * @summary Generates the HTML for the qualifications section, rendering each as a stylized tag.
  *
- * @param {Array<string|Object>} qualifications - An array of qualification strings or objects containing specific text and categories.
+ * @param {Array<string>} qualifications - An array of qualification strings.
  * @returns {string} The formatted HTML string for the qualifications section.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
@@ -66,11 +50,7 @@ const renderQualifications = (qualifications) => `
 		<h2>Qualifications</h2>
 		<div class="tag-container">
 			${ensureArray(qualifications)
-		.map(q => {
-			const text = typeof q === 'string' ? q : q.text;
-			const cat = (typeof q === 'object' && q.category) ? q.category : 'both';
-			return `<div class="tag dynamic-content" data-category="${cat}">${escapeHTML(text)}</div>`;
-		})
+		.map(text => `<div class="tag">${escapeHTML(text)}</div>`)
 		.join('')}
 		</div>
 	</section>
@@ -80,27 +60,18 @@ const renderQualifications = (qualifications) => `
  * @function
  * @summary Generates the HTML layout for an individual timeline item (e.g., a job role or degree).
  *
- * @param {Object} [item={}] - Timeline details. Expects title, company, time_period, logo, an optional root category, and a description (which can be a string or an array of {text, category} objects).
+ * @param {Object} [item={}] - Timeline details. Expects title, company, time_period, logo, and a description.
  * @returns {string} The formatted HTML string for a single timeline item.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
  */
 const renderTimelineItem = (item = {}) => {
-	const containerCategory = item.category || 'both';
-	let descriptionHTML = '';
-
-	if (Array.isArray(item.description)) {
-		descriptionHTML = item.description.map(desc => {
-			if (!desc.text) return '';
-			return `<p class="dynamic-content" data-category="${desc.category}">${escapeHTML(desc.text)}</p>`;
-		}).join('');
-	}
-	else if (typeof item.description === 'string') {
-		descriptionHTML = `<p>${escapeHTML(item.description)}</p>`;
-	}
+	const descriptionHTML = item.description.map(desc => {
+		return `<p>${escapeHTML(desc)}</p>`;
+	}).join('');
 
 	return `
-	<div class="timeline-item dynamic-content" data-category="${containerCategory}">
+	<div class="timeline-item">
 		<img src="${item.logo}" alt="Logo" class="item-logo">
 
 		<div class="item-details">
@@ -183,7 +154,6 @@ const generateContent = (dynamic) => {
 		timelineHTML,
 		footerTag(),
 		'</div>',
-		'<script src="/assets/script/homepage.js"></script>',
 		'</body>',
 		'</html>',
 	]);
