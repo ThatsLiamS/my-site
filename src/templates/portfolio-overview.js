@@ -1,62 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-
 const globalContent = require('../content/global.json');
 
-const { escapeHTML, saveToFile, ensureArray, joinHTML } = require('./lib/utils');
+const { escapeHTML, ensureArray, joinHTML, formatDate } = require('./lib/utils');
+const { saveToFile, getAllWriteups } = require('./lib/fileUtils');
 const { headTag, navTag, footerTag } = require('./lib/components');
-
-/**
- * @function
- * @summary Reads and parses a JSON file from the filesystem.
- *
- * @param {string} filePath - The absolute path to the JSON file to read.
- * @returns {Object|null} The parsed JSON object, or null if reading/parsing fails.
- *
- * @author Liam Skinner <me@liamskinner.co.uk>
- */
-const readJSONFile = (filePath) => {
-	try {
-		const raw = fs.readFileSync(filePath, 'utf8');
-		return JSON.parse(raw);
-	}
-	catch (err) {
-		console.warn(`Warning: Could not read/parse file at ${filePath}`, err.message);
-		return null;
-	}
-};
-
-/**
- * @function
- * @summary Fetches, parses, filters, and sorts all valid writeup JSON files from the content directory.
- *
- * @returns {Array<Object>} An array of parsed writeup objects, sorted by date (newest first).
- *
- * @author Liam Skinner <me@liamskinner.co.uk>
- */
-const getWriteups = () => {
-	const folderPath = path.resolve(__dirname, '../content/writeups/');
-
-	try {
-		const files = fs.readdirSync(folderPath);
-		return files
-			.filter(file =>
-				path.extname(file).toLowerCase() === '.json' &&
-				file !== 'template.json',
-			)
-			.map(file => readJSONFile(path.join(folderPath, file)))
-			.filter(Boolean)
-			.sort((a, b) => {
-				const dateA = a.date || '';
-				const dateB = b.date || '';
-				return dateB.localeCompare(dateA);
-			});
-	}
-	catch (error) {
-		console.error('Error fetching writeups directory:', error.message);
-		return [];
-	}
-};
 
 /**
  * @function
@@ -100,7 +46,7 @@ const renderTags = (tags) => {
  * @function
  * @summary Generates the HTML for a single writeup preview card within the portfolio grid.
  *
- * @param {Object} [writeup={}] - The specific writeup data object to display.
+ * @param {Object} [writeup={}] - The specific writeup data object. Expected keys: id, title, summary, tags, date, difficulty, and platform.
  * @returns {string} The formatted HTML string for the writeup card.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
@@ -108,12 +54,7 @@ const renderTags = (tags) => {
 const renderWriteupCard = (writeup = {}) => {
 	const tagsHTML = renderTags(writeup.tags);
 
-	const dateObj = new Date(writeup.date);
-	const formattedDate = dateObj.toLocaleDateString('en-GB', {
-		day: 'numeric',
-		month: 'short',
-		year: 'numeric',
-	});
+	const formattedDate = formatDate(writeup.date, 'long');
 
 	const diffRaw = (writeup.difficulty || 'Medium');
 	const diffSlug = diffRaw.toLowerCase();
@@ -242,7 +183,7 @@ const generateContent = (writeups) => {
 
 /**
  * @function
- * @summary Retrieves writeup data, generates the portfolio HTML content, and saves it to a file.
+ * @summary Retrieves, chronologically sorts (newest first), and processes writeup data to generate the portfolio HTML file.
  *
  * @param {string} destination - The directory path where 'portfolio.html' will be output.
  * @returns {void} This function does not return a value.
@@ -251,9 +192,13 @@ const generateContent = (writeups) => {
  */
 const buildPortfolioOverview = (destination) => {
 	try {
-		const writeups = getWriteups();
+		const writeups = getAllWriteups()
+			.sort((a, b) => {
+				const dateA = a.date || '';
+				const dateB = b.date || '';
+				return dateB.localeCompare(dateA);
+			});
 		const html = generateContent(writeups);
-
 		saveToFile(html, destination, 'portfolio');
 	}
 	catch (error) {

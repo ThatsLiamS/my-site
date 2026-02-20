@@ -2,7 +2,8 @@ const path = require('path');
 
 const globalContent = require('../content/global.json');
 
-const { escapeHTML, saveToFile, ensureArray, joinHTML } = require('./lib/utils');
+const { escapeHTML, ensureArray, joinHTML } = require('./lib/utils');
+const { saveToFile } = require('./lib/fileUtils');
 const { headTag, navTag, footerTag } = require('./lib/components');
 
 /**
@@ -79,7 +80,7 @@ const renderQualifications = (qualifications) => `
  * @function
  * @summary Generates the HTML layout for an individual timeline item (e.g., a job role or degree).
  *
- * @param {Object} item - An object containing timeline details like title, company, time_period, logo, and description.
+ * @param {Object} [item={}] - Timeline details. Expects title, company, time_period, logo, an optional root category, and a description (which can be a string or an array of {text, category} objects).
  * @returns {string} The formatted HTML string for a single timeline item.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
@@ -136,7 +137,7 @@ const renderTimelineSection = ({ id, title, data }) => `
  * @function
  * @summary Orchestrates the generation of the entire HTML page structure and injects the parsed data.
  *
- * @param {Object} dynamic - The dynamic JSON data used to populate the page content (biography, experience, etc.).
+ * @param {Object} dynamic - The dynamic JSON data populating the page. Expected to contain: summary, biography, qualifications, experience, education, and awards.
  * @returns {string} The complete, concatenated HTML string for the homepage.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
@@ -190,7 +191,7 @@ const generateContent = (dynamic) => {
 
 /**
  * @function
- * @summary Loads the `index.json` data, clears it from the require cache to ensure freshness, and builds the HTML file.
+ * @summary Loads the `index.json` data and builds the HTML file.
  *
  * @param {string} destination - The target directory path where the generated 'index.html' file will be saved.
  * @returns {void} This function does not return a value.
@@ -200,7 +201,6 @@ const generateContent = (dynamic) => {
 const buildIndexPage = (destination) => {
 	try {
 		const dataPath = path.resolve(__dirname, '../content/index.json');
-		delete require.cache[require.resolve(dataPath)];
 		const jsonData = require(dataPath);
 
 		const html = generateContent(jsonData);

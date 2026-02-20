@@ -6,6 +6,7 @@
 	"scripts": {
 		"build": "node src/generator.js",
 		"start": "npm run build && firebase emulators:start",
+		"start-only": "firebase emulators:start",
 		"deploy": "npm run build && firebase deploy"
 	},
 	"repository": {

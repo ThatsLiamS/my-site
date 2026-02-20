@@ -1,6 +1,7 @@
 const globalContent = require('../content/global.json');
 
-const { escapeHTML, saveToFile, joinHTML } = require('./lib/utils');
+const { escapeHTML, joinHTML } = require('./lib/utils');
+const { saveToFile } = require('./lib/fileUtils');
 
 /**
  * @function
@@ -77,6 +78,7 @@ const generateContent = () => {
  * @summary Generates the 404 page content and saves it as an HTML file in the specified destination.
  *
  * @param {string} destination - The directory path where the '404.html' file will be saved.
+ * @throws {Error} Throws an error if generating the HTML or saving to the filesystem fails.
  * @returns {void} This function does not return a value.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>

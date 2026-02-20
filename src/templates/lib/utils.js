@@ -1,5 +1,4 @@
-const fs = require('fs');
-const fsPromise = require('fs/promises');
+const fs = require('fs/promises');
 const path = require('path');
 
 /**
@@ -49,28 +48,6 @@ const joinHTML = (arr) => {
 };
 
 /**
- * @function
- * @summary Recursively creates the destination directory if needed and writes content to an HTML file.
- *
- * @param {string} content - The HTML string content to write to the file.
- * @param {string} destination - The target directory path.
- * @param {string} filename - The name of the file (excluding the .html extension).
- * @returns {void} This function does not return a value.
- *
- * @author Liam Skinner <me@liamskinner.co.uk>
- */
-const saveToFile = (content, destination, filename) => {
-	try {
-		fs.mkdirSync(destination, { recursive: true });
-		const filePath = path.join(destination, `${filename}.html`);
-		fs.writeFileSync(filePath, content, 'utf8');
-	}
-	catch (error) {
-		console.error(`Error writing file ${filename}:`, error.message);
-	}
-};
-
-/**
  * @function @async
  * @summary Cleans the public build directory and copies static assets into it.
  *
@@ -84,11 +61,11 @@ const resetAssets = async () => {
 		const BUILD_DIR = path.resolve(__dirname, './../../../public');
 		const ASSETS_DIR = path.resolve(__dirname, './../../assets');
 
-		await fsPromise.rm(BUILD_DIR, { recursive: true, force: true });
-		await fsPromise.mkdir(BUILD_DIR, { recursive: true });
+		await fs.rm(BUILD_DIR, { recursive: true, force: true });
+		await fs.mkdir(BUILD_DIR, { recursive: true });
 
 		const destDir = path.join(BUILD_DIR, 'assets');
-		await fsPromise.cp(ASSETS_DIR, destDir, { recursive: true });
+		await fs.cp(ASSETS_DIR, destDir, { recursive: true });
 	}
 	catch (error) {
 		console.error('Error within utils.js:', error);
@@ -96,10 +73,29 @@ const resetAssets = async () => {
 	}
 };
 
+/**
+ * @function
+ * @summary Parses and formats a date string into a localized British English (en-GB) date string.
+ *
+ * @param {string} dateString - A valid date string that can be parsed by the JavaScript Date constructor.
+ * @param {string} [formatType='short'] - Determines the verbosity of the output. 'short' omits the weekday, while any other value includes it.
+ * @returns {string} The formatted date string based on the specified format type.
+ *
+ * @author Liam Skinner <me@liamskinner.co.uk>
+ */
+const formatDate = (dateString, formatType = 'short') => {
+	const dateObj = new Date(dateString);
+	const options = formatType === 'short'
+		? { day: 'numeric', month: 'short', year: 'numeric' }
+		: { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+
+	return dateObj.toLocaleDateString('en-GB', options);
+};
+
 module.exports = {
 	escapeHTML,
-	saveToFile,
 	ensureArray,
 	joinHTML,
 	resetAssets,
+	formatDate,
 };
