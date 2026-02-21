@@ -126,12 +126,13 @@ const generateContent = (dynamic) => {
 		author: globalContent.site.author.fullName,
 		summary: dynamic.summary,
 		base_url: globalContent.site.base_url,
-		style_name: 'homepage',
+		stylesheets: ['homepage'],
+		javascripts: ['navbar', 'homepage'],
 	};
 
 	const navInfo = {
 		left: ['../portfolio', './Portfolio'],
-		centre: [
+		right: [
 			['#about', '#About'],
 			['#experience', '#Experience'],
 			['#education', '#Education'],
@@ -161,7 +162,6 @@ const generateContent = (dynamic) => {
 		timelineHTML,
 		'</main>',
 		footerTag(),
-		'<script src="/assets/script/homepage.js"></script>',
 		'</body>',
 		'</html>',
 	]);

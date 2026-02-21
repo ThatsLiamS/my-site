@@ -126,6 +126,26 @@ footer {
 	color: var(--primary-accent);
 }
 
+/* Mobile Menu Toggle */
+.nav-toggle {
+	display: none;
+}
+
+.hamburger {
+	display: none;
+	flex-direction: column;
+	cursor: pointer;
+	gap: 5px;
+}
+
+.hamburger .bar {
+	width: 25px;
+	height: 3px;
+	background-color: var(--primary-accent);
+	border-radius: 3px;
+	transition: all 0.3s ease-in-out;
+}
+
 /* UI Components */
 .card {
 	background: var(--card-bg);
@@ -211,8 +231,41 @@ footer {
 
 /* Responsive */
 @media (width <= 600px) {
+	.hamburger {
+		display: flex;
+	}
+
 	.nav-links {
-		display: none;
+		display: none; /* Hidden by default on mobile */
+		flex-direction: column;
+		position: absolute;
+		top: 60px; /* Matches navbar height */
+		left: 0;
+		width: 100%;
+		background-color: rgb(13 17 23 / 95%);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid var(--primary-accent);
+		padding: 20px 0;
+		text-align: center;
+		gap: 15px;
+	}
+
+	/* Show links when checkbox is checked */
+	.nav-toggle:checked ~ .nav-links {
+		display: flex;
+	}
+
+	/* Animate hamburger into an 'X' */
+	.nav-toggle:checked ~ .hamburger .bar:nth-child(1) {
+		transform: translateY(8px) rotate(45deg);
+	}
+
+	.nav-toggle:checked ~ .hamburger .bar:nth-child(2) {
+		opacity: 0;
+	}
+
+	.nav-toggle:checked ~ .hamburger .bar:nth-child(3) {
+		transform: translateY(-8px) rotate(-45deg);
 	}
 
 	.container {

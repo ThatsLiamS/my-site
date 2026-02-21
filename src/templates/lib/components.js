@@ -6,7 +6,7 @@ const { escapeHTML } = require('./utils');
  * @function
  * @summary Generates the HTML head section with meta tags, title, and stylesheets.
  *
- * @param {Object} information - An object containing page-specific metadata (title, author, summary, base_url, style_name).
+ * @param {Object} information - An object containing page-specific metadata (title, author, summary, base_url, stylesheets).
  * @returns {string} The formatted HTML string representing the <head> element.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
@@ -16,8 +16,20 @@ const headTag = (information) => {
 	const author = escapeHTML(information.author);
 	const summary = escapeHTML(information.summary);
 	const baseUrl = escapeHTML(information.base_url);
-	const style_name = escapeHTML(information.style_name);
 
+	const stylesheet = (information.stylesheets || [])
+		.map((name) => {
+			const sheetName = escapeHTML(name);
+			return `<link rel="stylesheet" href="/assets/style/${sheetName}.css"></link>`;
+		})
+		.join('\n');
+
+	const javascript = (information.javascripts || [])
+		.map((name) => {
+			const scriptName = escapeHTML(name);
+			return `<script src="/assets/script/${scriptName}.js" defer></script>`;
+		})
+		.join('\n');;
 
 	return `
 	<head>
@@ -45,7 +57,8 @@ const headTag = (information) => {
 
 		<link rel="icon" type="image/webp" href="/assets/images/icon.webp">
 		<link rel="stylesheet" href="/assets/style/global.css">
-		<link rel="stylesheet" href="/assets/style/${style_name}.css">
+		${stylesheet}
+		${javascript}
 
 		<meta http-equiv="Content-Security-Policy" content="
 			default-src 'self';
@@ -69,18 +82,35 @@ const headTag = (information) => {
 };
 
 /**
+ * @constant {string}
+ * @summary The HTML tags for the classic hamburger symbol.
+ *
+ * @author Liam Skinner <me@liamskinner.co.uk>
+ */
+const hamburgerHtml = `
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+<label for="nav-toggle" class="hamburger">
+	<span class="bar"></span>
+	<span class="bar"></span>
+	<span class="bar"></span>
+</label>
+`;
+
+/**
  * @function
  * @summary Generates the HTML navigation bar with links and social icons.
  *
- * @param {Object} information - An object containing navigation details (left logo data, centre links).
+ * @param {Object} information - An object containing navigation details (left data, & right links).
  * @returns {string} The formatted HTML string representing the <nav> element.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
  */
 const navTag = (information) => {
-	const navLinksHTML = information.centre
+	const navLinksHTML = information.right
 		.map(link => `<li><a href="${link[0]}">${escapeHTML(link[1])}</a></li>`)
 		.join('\n');
+
+	const hamburger = navLinksHTML.length > 0 ? hamburgerHtml : '';
 
 	return `
 	<nav class="navbar">
@@ -88,7 +118,7 @@ const navTag = (information) => {
 			<a href="${information.left[0]}" class="nav-logo">
 				${escapeHTML(information.left[1])}
 			</a>
-
+			${hamburger}
 			<ul class="nav-links">
 				${navLinksHTML}
 			</ul>

@@ -156,12 +156,13 @@ const generateContent = (writeups) => {
 		author: globalContent.site.author.fullName,
 		summary: 'Security Research and CTF Writeups',
 		base_url: globalContent.site.base_url,
-		style_name: 'portfolio-overview',
+		stylesheets: ['portfolio-overview'],
+		javascripts: ['portfolio'],
 	};
 
 	const navInfo = {
 		left: ['/', './Homepage'],
-		centre: [],
+		right: [],
 	};
 
 	return joinHTML([
@@ -175,7 +176,6 @@ const generateContent = (writeups) => {
 		renderWriteupsList(writeups),
 		'</main>',
 		footerTag(),
-		'<script src="/assets/script/portfolio.js"></script>',
 		'</body>',
 		'</html>',
 	]);

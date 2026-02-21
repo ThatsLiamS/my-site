@@ -81,12 +81,13 @@ const generateContent = (dynamic) => {
 		author: globalContent.site.author.fullName,
 		summary: dynamic.summary,
 		base_url: globalContent.site.base_url,
-		style_name: 'writeups',
+		stylesheets: ['writeups'],
+		javascripts: ['navbar'],
 	};
 
 	const navInfo = {
 		left: ['/portfolio', './Portfolio'],
-		centre: dynamic.nav,
+		right: dynamic.nav,
 	};
 
 	return joinHTML([
