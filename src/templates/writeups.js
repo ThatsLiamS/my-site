@@ -77,15 +77,15 @@ const articleTag = (dynamic) => {
  */
 const generateContent = (dynamic) => {
 	const headInfo = {
-		title: `Writeup: ${escapeHTML(dynamic.title)} | ${escapeHTML(globalContent.site.author)}`,
-		author: globalContent.site.author,
+		title: `Writeup: ${escapeHTML(dynamic.title)} | ${escapeHTML(globalContent.site.author.fullName)}`,
+		author: globalContent.site.author.fullName,
 		summary: dynamic.summary,
 		base_url: globalContent.site.base_url,
 		style_name: 'writeups',
 	};
 
 	const navInfo = {
-		left: ['/portfolio', 'Portfolio'],
+		left: ['/portfolio', './Portfolio'],
 		centre: dynamic.nav,
 	};
 

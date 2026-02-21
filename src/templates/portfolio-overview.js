@@ -152,15 +152,15 @@ const renderWriteupsList = (writeups) => {
  */
 const generateContent = (writeups) => {
 	const headInfo = {
-		title: `Portfolio | ${escapeHTML(globalContent.site.author)}`,
-		author: globalContent.site.author,
+		title: `Portfolio | ${escapeHTML(globalContent.site.author.fullName)}`,
+		author: globalContent.site.author.fullName,
 		summary: 'Security Research and CTF Writeups',
 		base_url: globalContent.site.base_url,
 		style_name: 'portfolio-overview',
 	};
 
 	const navInfo = {
-		left: ['/', 'Homepage'],
+		left: ['/', './Homepage'],
 		centre: [],
 	};
 

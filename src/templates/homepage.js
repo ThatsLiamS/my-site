@@ -10,29 +10,36 @@ const { headTag, navTag, footerTag } = require('./lib/components');
  * @function
  * @summary Generates the HTML for the profile header and the 'About Me' section.
  *
- * @param {Array<string>} biography - An array of biographical text.
  * @returns {string} The formatted HTML string for the introductory sections.
  *
  * @author Liam Skinner <me@liamskinner.co.uk>
  */
 const renderIntro = (biography) => {
-	const rawBio = biography || [];
-	const formattedBio = rawBio.map(e => escapeHTML(e));
+	const shortName = globalContent.site.author.shortName;
+
+	const htmlBio = (biography || [])
+		.map(e => escapeHTML(e))
+		.join('</p> <p class="output">');
 
 	return `
-	<header class="card profile-header">
-		<div class="profile-img"></div>
-		<h1>${escapeHTML(globalContent.site.author)}</h1>
-	</header>
-	<section id="about" class="card">
-		<h2>About Me</h2>
-		
-		<div class="bio-container">
-			<p>
-				${formattedBio.join('</p><p>')}
-			</p>
+	<header id="about" class="terminal-window">
+		<div class="terminal-header">
+			<span class="dot close"></span>
+			<span class="dot minimize"></span>
+			<span class="dot maximize"></span>
 		</div>
-	</section>
+		<div class="terminal-body">
+			<p><span class="prompt">(${shortName}㉿home)-[~] $</span> whoami</p>
+			<p class="output" id="typewriter-text"></p>
+			
+			<p><span class="prompt">(${shortName}㉿home)-[~] $</span> cat bio.txt</p>
+			<p class="output">
+				${htmlBio}
+			</p>
+			
+			<p><span class="prompt">(${shortName}㉿home)-[~] $</span> <span class="cursor">_</span></p>
+		</div>
+	</header>
 `;
 };
 
@@ -115,20 +122,20 @@ const renderTimelineSection = ({ id, title, data }) => `
  */
 const generateContent = (dynamic) => {
 	const headInfo = {
-		title: `${escapeHTML(globalContent.site.author)}`,
-		author: globalContent.site.author,
+		title: `${escapeHTML(globalContent.site.author.fullName)} | Offensive Security Specialist`,
+		author: globalContent.site.author.fullName,
 		summary: dynamic.summary,
 		base_url: globalContent.site.base_url,
 		style_name: 'homepage',
 	};
 
 	const navInfo = {
-		left: ['../portfolio', 'Portfolio'],
+		left: ['../portfolio', './Portfolio'],
 		centre: [
-			['#about', 'About'],
-			['#experience', 'Experience'],
-			['#education', 'Education'],
-			['#awards', 'Awards'],
+			['#about', '#About'],
+			['#experience', '#Experience'],
+			['#education', '#Education'],
+			['#awards', '#Awards'],
 		],
 	};
 
@@ -148,12 +155,13 @@ const generateContent = (dynamic) => {
 		headTag(headInfo),
 		'<body>',
 		navTag(navInfo),
-		'<div class="container">',
+		'<main class="container">',
 		renderIntro(dynamic.biography),
 		renderQualifications(dynamic.qualifications),
 		timelineHTML,
+		'</main>',
 		footerTag(),
-		'</div>',
+		'<script src="/assets/script/homepage.js"></script>',
 		'</body>',
 		'</html>',
 	]);

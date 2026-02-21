@@ -82,30 +82,6 @@ const navTag = (information) => {
 		.map(link => `<li><a href="${link[0]}">${escapeHTML(link[1])}</a></li>`)
 		.join('\n');
 
-	const socials = globalContent.socials || [];
-
-	/**
-	 * @function
-	 * @summary Retrieves the URL for a specific social media profile.
-	 *
-	 * @param {number} index - The array index of the social media item.
-	 * @returns {string} The social media URL, or '#' if it doesn't exist.
-	 *
-	 * @author Liam Skinner <me@liamskinner.co.uk>
-	 */
-	const getSocialUrl = (index) => socials[index] ? socials[index].url : '#';
-
-	/**
-	 * @function
-	 * @summary Retrieves the SVG path data for a specific social media icon.
-	 *
-	 * @param {number} index - The array index of the social media item.
-	 * @returns {string} The SVG path data, or '#' if it doesn't exist.
-	 *
-	 * @author Liam Skinner <me@liamskinner.co.uk>
-	 */
-	const getSocialPath = (index) => socials[index] ? socials[index].svg_path : '#';
-
 	return `
 	<nav class="navbar">
 		<div class="nav-container">
@@ -116,26 +92,6 @@ const navTag = (information) => {
 			<ul class="nav-links">
 				${navLinksHTML}
 			</ul>
-
-			<div class="nav-socials">
-				<a href="${getSocialUrl(0)}" target="_blank" aria-label="LinkedIn">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-						<path d="${getSocialPath(0)}"/>
-					</svg>
-				</a>
-				
-				<a href="${getSocialUrl(1)}" target="_blank" aria-label="GitHub">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-						<path d="${getSocialPath(1)}"/>
-					</svg>
-				</a>
-				
-				<a href="${getSocialUrl(2)}" target="_blank" aria-label="Donate">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-						<path d="${getSocialPath(2)}"/>
-					</svg>
-				</a>
-			</div>
 		</div>
 	</nav>
 	`;
@@ -151,7 +107,7 @@ const navTag = (information) => {
  */
 const footerTag = () => `
 	<footer>
-		&copy; ${new Date().getFullYear()} ${escapeHTML(globalContent.site.author)}.
+		&copy; ${new Date().getFullYear()} ${escapeHTML(globalContent.site.author.fullName)}.
 		All rights reserved.
 	</footer>
 `;

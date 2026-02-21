@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const containers = document.querySelectorAll('.smart-tags');
 
 		containers.forEach(container => {
-			if (container.offsetParent === null) return;
+			if (!container.offsetWidth) return;
 
 			const tags = Array.from(container.querySelectorAll('.candidate'));
 			const counter = container.querySelector('.more-counter');
@@ -91,37 +91,35 @@ document.addEventListener('DOMContentLoaded', () => {
 			tags.forEach(t => t.style.display = 'inline-block');
 			counter.style.display = 'none';
 
-			const containerWidth = container.clientWidth;
+			const containerWidth = container.offsetWidth;
 			const gap = 8;
-			const counterWidth = 35;
+			const estimatedCounterWidth = 45;
 
-			let currentWidth = 0;
+			let currentLineWidth = 0;
 			let hiddenCount = 0;
 
-			tags.forEach(tag => {
-				const tagW = tag.offsetWidth + gap;
+			tags.forEach((tag) => {
+				const tagWidth = tag.getBoundingClientRect().width + gap;
 
-				if (currentWidth + tagW < (containerWidth - counterWidth)) {
-					currentWidth += tagW;
-				}
-				else {
+				if (currentLineWidth + tagWidth > (containerWidth - estimatedCounterWidth)) {
 					tag.style.display = 'none';
 					hiddenCount++;
+				}
+				else {
+					currentLineWidth += tagWidth;
 				}
 			});
 
 			if (hiddenCount > 0) {
-				counter.innerText = '+' + hiddenCount;
+				counter.innerText = `+${hiddenCount}`;
 				counter.style.display = 'inline-block';
 			}
 		});
 	};
 
-	adjustTags();
-
-	let resizeTimer;
-	window.addEventListener('resize', () => {
-		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(adjustTags, 100);
+	window.addEventListener('load', () => {
+		setTimeout(adjustTags, 50);
 	});
+
+	window.addEventListener('resize', adjustTags);
 });

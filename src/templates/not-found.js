@@ -17,9 +17,9 @@ const renderHead = () => `
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<title>Page Not Found | ${escapeHTML(globalContent.site.author)}</title>
+	<title>Page Not Found | ${escapeHTML(globalContent.site.author.fullName)}</title>
 
-	<link rel="stylesheet" href="/assets/style/root.css">
+	<link rel="stylesheet" href="/assets/style/global.css">
 	<link rel="stylesheet" href="/assets/style/not-found.css">
 </head>
 `;
