@@ -1,91 +1,57 @@
+/* Variables */
 :root {
 	--diff-easy-bg: #e6f4ea;
 	--diff-easy-text: #1e8e3e;
-    --diff-med-bg: #fef7e0; 
+	--diff-med-bg: #fef7e0; 
 	--diff-med-text: #b06000;
-    --diff-hard-bg: #fce8e6;
+	--diff-hard-bg: #fce8e6;
 	--diff-hard-text: #d93025;
-	--primary-blue: #0a66c2;
-	--primary-dark: #004182;
-	--light-blue-bg: #e7f3ff;
-	--bg-gray: #f3f2ef;
-	--white: #fff;
-	--text-dark: #191919;
 	--text-gray: #666;
 	--border-radius: 10px;
-	--font-stack: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif;
+	--bg-dark: #0d1117;
+	--card-bg: #161b22;
+	--primary-accent: #0fc;
+	--text-main: #c9d1d9;
+	--text-muted: #8b949e;
+	--border-color: #30363d;
+	--font-mono: "Fira Code", "Courier New", courier, monospace;
+	--font-stack: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
 }
 
+/* Base & Reset */
 * {
 	margin: 0;
 	padding: 0;
-	box-sizing:
-	border-box;
+	box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+	scroll-padding-top: 75px; 
+	scroll-behavior: smooth;
+}
 
 body {
 	font-family: var(--font-stack);
-	background-color: var(--bg-gray);
-	color: var(--text-dark);
+	background-color: var(--bg-dark);
+	color: var(--text-main);
 	line-height: 1.6;
+	padding-top: 80px; 
 }
 
-section {
-	scroll-margin-top: 80px;
-}
-.hidden { display: none !important; }
-
-
-/* Standard Page Layout */
-body:not(.full-height) { padding-top: 40px; }
-
-.container {
-	max-width: 800px;
-	margin: 40px auto 0;
-	padding: 0 20px;
+body:not(.full-height) {
+	padding-top: 40px;
 }
 
-/* Cards */
-.card {
-	background: var(--white);
-	border-radius: var(--border-radius);
-	padding: 30px;
-	margin-bottom: 20px;
-	box-shadow: 0 4px 6px rgb(0 0 0 / 5%);
-	border: 1px solid #e0e0e0;
-}
-
-/* Buttons */
-.btn {
-	display: inline-block;
-	background-color: var(--primary-blue);
-	color: var(--white);
-	padding: 10px 24px;
-	border-radius: 24px;
-	text-decoration: none;
-	font-weight: 600;
-	transition: background 0.3s, transform 0.2s;
-}
-
-.btn:hover {
-	background-color: var(--primary-dark);
-	transform: translateY(-2px);
-}
-
-
-/* Typography Helpers */
+/* Typography */
 h1, h2, h3 {
-	color: var(--text-dark);
+	color: var(--primary-accent); 
 }
 
-h2 {
-	font-size: 1.4rem;
+h2 { 
+	font-family: var(--font-mono); 
+	border-bottom: 1px dashed var(--border-color); 
+	padding-bottom: 10px; 
 	margin-bottom: 20px;
-	color: var(--primary-blue);
-	display: flex;
-	align-items: center;
 }
 
 p {
@@ -93,52 +59,61 @@ p {
 }
 
 .subtitle {
-	color: var(--text-gray);
+	color: var(--text-muted);
 	font-size: 0.9rem;
 	margin-bottom: 10px;
 	display: block;
+	font-family: var(--font-mono);
 }
 
-.tag-container { 
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	margin-top: 15px;
-}
-
-.tag {
-	background-color: var(--light-blue-bg);
-	color: var(--primary-blue);
-	padding: 8px 16px;
-	border-radius: 6px;
-	font-size: 0.9rem;
-	font-weight: 600;
-}
-
-
-/* --- NAVIGATION --- */
-.navbar {
-	position: fixed; top: 0; left: 0; width: 100%;
-	background-color: rgb(255 255 255 / 90%);
-	backdrop-filter: blur(10px);
-	border-bottom: 1px solid #e0e0e0;
-	z-index: 1000; padding: 0 20px;
-}
-
-.nav-container {
+/* Layout */
+.container {
 	max-width: 800px;
 	margin: 0 auto;
-	height: 60px;
+	margin-top: 40px;
+	padding: 0 20px;
+}
+
+footer {
+	text-align: center;
+	margin-top: 10px;
+	color: var(--text-gray);
+	font-size: 0.8rem;
+	padding-bottom: 40px;
+}
+
+/* Navigation */
+.navbar {
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	width: 100%;
+	background-color: rgb(13 17 23 / 95%);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--primary-accent);
+	z-index: 1000; 
+	padding: 0 20px;
+}
+
+.nav-container { 
+	max-width: 800px;
+	margin: 0 auto;
+	height: 60px; 
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: center; 
+}
+
+.nav-logo, .nav-links a { 
+	font-family: var(--font-mono); 
+	color: var(--text-muted); 
+	text-decoration: none;
+	transition: color 0.3s ease;
 }
 
 .nav-logo {
-	font-weight: 700;
-	font-size: 1.2rem;
-	color: var(--primary-blue);
-	text-decoration: none;
+	color: var(--primary-accent);
+	font-weight: bold;
 }
 
 .nav-links {
@@ -147,68 +122,43 @@ p {
 	list-style: none;
 }
 
-.nav-links a {
-	text-decoration: none;
-	color: var(--text-gray);
-	font-size: 0.95rem;
-	font-weight: 500;
-	transition: color 0.2s;
-}
-
-.nav-socials a {
-	color: var(--text-gray);
-	transition: color 0.2s;
-	display: flex;
-}
-
-.nav-socials a:hover {
-	color: var(--primary-blue);
-}
-
 .nav-links a:hover {
-	color: var(--primary-blue);
+	color: var(--primary-accent);
 }
 
-.nav-socials {
+/* UI Components */
+.card {
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 30px;
+}
+
+.tag-container {
 	display: flex;
-	gap: 15px;
-	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
-@media (width <= 600px) {
-	.nav-links {
-		display: none;
-	}
-
-	.container {
-		margin: 20px auto;
-		margin-top: 40px;
-	}
-
-	.card {
-		padding: 20px;
-	}
+.tag {
+	background-color: rgb(0 255 204 / 10%);
+	color: var(--primary-accent);
+	border: 1px solid var(--primary-accent);
+	padding: 6px 12px;
+	border-radius: 4px;
+	font-size: 0.85rem;
+	font-family: var(--font-mono);
 }
 
-footer {
-	text-align: center;
-	margin-top: 40px;
-	color: var(--text-gray);
-	font-size: 0.8rem;
-	padding-bottom: 40px;
-}
-
-
-/* --- SHARED: DIFFICULTY INDICATORS --- */
-
-/* 1. Badges (Used in Portfolio) */
+/* Difficulty Indicators */
 .difficulty-badge {
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-weight: 700;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
 }
 
 .difficulty-badge.easy {
@@ -226,7 +176,6 @@ footer {
 	color: var(--diff-hard-text);
 }
 
-/* 2. Text Labels (Used in Writeup Metadata) */
 .easy, .medium, .hard {
 	font-weight: bold;
 }
@@ -243,7 +192,6 @@ footer {
 	color: var(--diff-hard-text);
 }
 
-/* 3. Borders (Used in Portfolio Cards AND Writeup Headers) */
 .difficulty-border-easy {
 	border-top: 4px solid var(--diff-easy-text) !important;
 }
@@ -254,4 +202,25 @@ footer {
 
 .difficulty-border-hard {
 	border-top: 4px solid var(--diff-hard-text) !important;
+}
+
+/* Utilities */
+.hidden {
+	display: none !important;
+}
+
+/* Responsive */
+@media (width <= 600px) {
+	.nav-links {
+		display: none;
+	}
+
+	.container {
+		margin: 20px auto;
+		margin-top: 40px;
+	}
+
+	.card {
+		padding: 20px;
+	}
 }
