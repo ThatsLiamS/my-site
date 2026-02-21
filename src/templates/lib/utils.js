@@ -92,10 +92,27 @@ const formatDate = (dateString, formatType = 'short') => {
 	return dateObj.toLocaleDateString('en-GB', options);
 };
 
+/**
+ * @function
+ * @summary Converts a string to Title Case, capitalizing the first letter of each word.
+ *
+ * @param {string} str - The string to be transformed.
+ * @returns {string} The transformed string with each word starting with an uppercase letter.
+ *
+ * @author Liam Skinner <me@liamskinner.co.uk>
+ */
+const toTitleCase = (str) => {
+	return str.replace(
+		/\w\S*/g,
+		text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
+	);
+};
+
 module.exports = {
 	escapeHTML,
 	ensureArray,
 	joinHTML,
 	resetAssets,
 	formatDate,
+	toTitleCase,
 };

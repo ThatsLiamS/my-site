@@ -1,6 +1,6 @@
 const globalContent = require('../content/global.json');
 
-const { escapeHTML, ensureArray, joinHTML, formatDate } = require('./lib/utils');
+const { escapeHTML, ensureArray, joinHTML, formatDate, toTitleCase } = require('./lib/utils');
 const { saveToFile, getAllWriteups } = require('./lib/fileUtils');
 const { headTag, navTag, footerTag } = require('./lib/components');
 
@@ -56,8 +56,8 @@ const renderWriteupCard = (writeup = {}) => {
 
 	const formattedDate = formatDate(writeup.date, 'long');
 
-	const diffRaw = (writeup.difficulty || 'Medium');
-	const diffSlug = diffRaw.toLowerCase();
+	const diffSlug = (writeup.difficulty || 'medium').toLowerCase();
+	const formattedDiff = toTitleCase(diffSlug);
 
 	const platformRaw = (writeup.platform || 'Other');
 	const platformSlug = getPlatformSlug(platformRaw);
@@ -71,7 +71,7 @@ const renderWriteupCard = (writeup = {}) => {
 	data-platform="${platformSlug}" data-difficulty="${diffSlug}">
 		<article class="grid-card difficulty-border-${diffSlug}">
 			<div class="card-top">
-				<span class="difficulty-badge ${diffSlug}">${escapeHTML(diffRaw)}</span>
+				<span class="difficulty-badge ${diffSlug}">${escapeHTML(formattedDiff)}</span>
 				<span class="card-date">${escapeHTML(platformRaw)} • ${formattedDate}</span>
 			</div>
 			

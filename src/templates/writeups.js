@@ -2,7 +2,7 @@ const path = require('path');
 
 const globalContent = require('../content/global.json');
 
-const { escapeHTML, ensureArray, joinHTML, formatDate } = require('./lib/utils');
+const { escapeHTML, ensureArray, joinHTML, formatDate, toTitleCase } = require('./lib/utils');
 const { saveToFile, getAllWriteups } = require('./lib/fileUtils');
 const { renderContentBlock } = require('./lib/blockParser');
 const { headTag, navTag, footerTag } = require('./lib/components');
@@ -23,6 +23,7 @@ const introTag = (dynamic) => {
 
 	const formattedDate = formatDate(dynamic.date, 'short');
 	const diffSlug = (dynamic.difficulty || 'medium').toLowerCase();
+	const formattedDiff = toTitleCase(diffSlug);
 
 	return `
 		<header class="card writeup-header difficulty-border-${diffSlug}">
@@ -36,7 +37,7 @@ const introTag = (dynamic) => {
 				Published: ${formattedDate}
 				• Difficulty:
 				<span class="${escapeHTML(dynamic.difficulty)}">
-					${escapeHTML(dynamic.difficulty)}
+					${escapeHTML(formattedDiff)}
 				</span>
 			</p>
 			
