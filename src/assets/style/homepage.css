@@ -112,14 +112,6 @@
 
 /* Responsive */
 @media (width <= 600px) {
-	.nav-links { 
-		display: none; 
-	}
-
-	.timeline-item { 
-		flex-direction: column; 
-	}
-
 	.item-logo { 
 		margin-bottom: 10px; 
 	}

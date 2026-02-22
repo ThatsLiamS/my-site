@@ -114,7 +114,6 @@ blockquote {
 table {
 	width: 100%;
 	border-collapse: collapse;
-	overflow-x: auto;
 	background: transparent;
 	color: var(--text-main);
 	text-align: left;
@@ -137,8 +136,24 @@ tbody tr:hover {
 	background-color: rgb(255 255 255 / 3%);
 }
 
+.table-container::-webkit-scrollbar {
+	height: 8px; 
+	background-color: var(--bg-dark); 
+}
+
+.table-container::-webkit-scrollbar-thumb {
+	background-color: var(--border-color); 
+	border-radius: 10px;
+	border: 2px solid var(--bg-dark); 
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+	background-color: var(--primary-accent); 
+	cursor: pointer;
+}
+
 /* Responsive */
-@media (width <= 600px) {
+@media (width <= 650px) {
 	.table-container table td, 
 	.table-container table th {
 		white-space: nowrap;
