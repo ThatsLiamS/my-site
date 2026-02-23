@@ -1,17 +1,17 @@
 # Portfolio Website
 
-> The source code for my personal website, hosted at [www.liamskinner.co.uk](https://www.liamskinner.co.uk).
+> The source code for my personal cyber security portfolio, hosted at [www.liamskinner.co.uk](https://www.liamskinner.co.uk).
 
-This repository houses a dual-mode personal portfolio and CV, bridging the gap between two very different worlds: **Outdoor Instruction** and **Cyber Security**.
+This repository houses my professional portfolio and CV, dedicated entirely to the world of **Cyber Security** and **Offensive Security**. 
 
-## 🌲 vs 🔐 The Concept
+## 🔐 The Concept
 
-The core feature of homepage is a context-switch toggle. Depending on the user's selection, the site renders two completely different versions of my professional history:
+Designed with a dark-theme aesthetic that leans into offensive security culture, the site serves as a central hub for my professional history, technical skills, and certifications. 
 
-* **Cyber Mode:** Focuses on technical skills, certifications, and security research.
-* **Outdoor Mode:** Focuses on adventure training, coaching qualifications, and professional leadership.
-
-Additionally, the `/portfolio` section serves as a knowledge base, summarising security writeups, CTF walkthroughs, and lab reports.
+Additionally, the `/portfolio` section acts as an active knowledge base, summarising:
+* Security writeups and vulnerability research
+* CTF (Capture The Flag) walkthroughs
+* Lab reports and technical documentation
 
 ## 🛠️ The Stack: Custom SSG
 
@@ -21,14 +21,14 @@ It parses raw content (Markdown/JSON), applies templates, and renders static HTM
 
 ### Key Features
 * **Zero Client-Side Bloat:** No massive hydration bundles; just semantic HTML and CSS.
-* **Togglable Content Engine:** Custom logic to filter content based on the selected "career mode."
+* **Static Content Engine:** Custom logic to parse, organize, and render my JSON-based security writeups into a highly readable format.
 
 ## 🚀 Getting Started
 
 To download this project locally:
 
 ```bash
-git clone https://github.com/thatsliams/my-site
+git clone https://github.com/ThatsLiamS/my-site
 cd my-site
 npm install
 ```
@@ -38,9 +38,9 @@ npm install
 ```text
 .
 ├── src/
-│   ├── content/        # Writeups and JSON data
+│   ├── content/        # Security writeups, CTF walkthroughs, and JSON data
 │   ├── templates/      # HTML logic for the custom SSG
-│   └── assets/         # CSS, JS, and Images
+│   └── assets/         # CSS (Dark Theme), JS, and Images
 ├── public/             # Compiled output (ignored by Git)
 └── .github/            # CI/CD and Community files
 ```
