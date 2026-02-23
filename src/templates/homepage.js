@@ -4,6 +4,7 @@ const globalContent = require('../content/global.json');
 
 const { escapeHTML, ensureArray, joinHTML } = require('./lib/utils');
 const { saveToFile } = require('./lib/fileUtils');
+const { renderContentBlock } = require('./lib/blockParser');
 const { headTag, navTag, footerTag } = require('./lib/components');
 
 /**
@@ -74,8 +75,8 @@ const renderQualifications = (qualifications) => `
  */
 const renderTimelineItem = (item = {}) => {
 	const descriptionHTML = item.description.map(desc => {
-		return `<p>${escapeHTML(desc)}</p>`;
-	}).join('');
+		return renderContentBlock(desc);
+	}).join('\n');
 
 	return `
 	<div class="timeline-item">
