@@ -5,6 +5,8 @@ const { minify: minifyJS } = require('terser');
 const CleanCSS = require('clean-css');
 const { minify: minifyHTML } = require('html-minifier-terser');
 
+const { createSitemap, createRobots } = require('./templates/lib/fileUtils.js');
+
 /**
  * @function @async
  * @summary Minifies all JavaScript, CSS, and HTML files within the public build directory.
@@ -91,6 +93,8 @@ const minifyCode = async () => {
 				);
 			}
 		});
+	await createSitemap('./public/');
+	await createRobots('./public/');
 
 	console.timeEnd('Build Time');
 	console.time('Minify Time');
