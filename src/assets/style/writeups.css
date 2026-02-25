@@ -101,7 +101,6 @@ blockquote {
 	background-color: rgb(0 255 204 / 5%);
 	border-left: 4px solid var(--primary-accent);
 	color: var(--text-muted);
-	font-style: italic;
 }
 
 /* Tables */

@@ -31,7 +31,7 @@ const renderIntro = (biography) => {
 		</div>
 		<div class="terminal-body">
 			<p><span class="prompt">(${shortName}㉿home)-[~] $</span> whoami</p>
-			<p class="output" id="typewriter-text"></p>
+			<p class="output" id="typewriter-text" data-texts='["${globalContent.site.author.fullName}"]'></p>
 			
 			<p><span class="prompt">(${shortName}㉿home)-[~] $</span> cat bio.txt</p>
 			<p class="output">

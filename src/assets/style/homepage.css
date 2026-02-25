@@ -54,6 +54,10 @@
 	margin-top: 5px;
 }
 
+#typewriter-text {
+	font-size: 24px;
+}
+
 .cursor {
 	animation: blink 1s step-end infinite;
 	background: var(--text-main);

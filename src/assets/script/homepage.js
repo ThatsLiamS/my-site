@@ -1,8 +1,13 @@
-const textToType = 'Liam Skinner AIoL';
 const typingSpeed = 35;
 
 document.addEventListener('DOMContentLoaded', () => {
 	const typeWriterElement = document.getElementById('typewriter-text');
+
+	const rawData = typeWriterElement.getAttribute('data-texts');
+	const textsArray = JSON.parse(rawData);
+
+	const textToType = textsArray[0];
+
 	let index = 0;
 
 	if (!typeWriterElement) return;
