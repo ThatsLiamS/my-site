@@ -60,19 +60,14 @@ const readJSON = (filePath) => {
 const createSitemap = (destination) => {
 	const baseUrl = globalContent.site.base_url;
 
-	const xml = [
-		'<?xml version="1.0" encoding="UTF-8"?>',
-		'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-	].join('\n');
-
 	const today = new Date();
 	const formattedDate = today.toISOString().split('T')[0];
 	const domainXML = [
-		'<url>',
-		`    <loc>${baseUrl}/</loc>`,
-		`    <lastmod>${formattedDate}</lastmod>`,
-		'    <priority>1.0</priority>',
-		'</url>',
+		'    <url>',
+		`        <loc>${baseUrl}/</loc>`,
+		`        <lastmod>${formattedDate}</lastmod>`,
+		'        <priority>1.0</priority>',
+		'    </url>',
 	].join('\n');
 
 	const allWriteups = getAllWriteups()
@@ -83,29 +78,31 @@ const createSitemap = (destination) => {
 		});;
 
 	const portfolioXML = [
-		'<url>',
-		`    <loc>${baseUrl}/portfolio</loc>`,
-		`    <lastmod>${allWriteups[0].date}</lastmod>`,
-		'    <priority>0.8</priority>',
-		'</url>',
+		'    <url>',
+		`        <loc>${baseUrl}/portfolio</loc>`,
+		`        <lastmod>${allWriteups[0].date}</lastmod>`,
+		'        <priority>0.8</priority>',
+		'    </url>',
 	].join('\n');
 
 	const writeupsXML = [];
 	for (const writeup of allWriteups) {
 		writeupsXML.push([
-			'<url>',
-			`    <loc>${baseUrl}/writeups/${writeup.id}</loc>`,
-			`    <lastmod>${writeup.date}</lastmod>`,
-			'    <priority>0.6</priority>',
-			'</url>',
+			'    <url>',
+			`        <loc>${baseUrl}/writeups/${writeup.id}</loc>`,
+			`        <lastmod>${writeup.date}</lastmod>`,
+			'        <priority>0.6</priority>',
+			'    </url>',
 		].join('\n'));
 	}
 
 	const xmlFile = [
-		xml,
+		'<?xml version="1.0" encoding="UTF-8"?>',
+		'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
 		domainXML,
 		portfolioXML,
 		writeupsXML.join('\n'),
+		'</urlset>',
 	].join('\n');
 
 	saveToFile(xmlFile, destination, 'sitemap.xml', false);
