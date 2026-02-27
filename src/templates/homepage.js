@@ -125,7 +125,7 @@ const generateContent = (dynamic) => {
 	const headInfo = {
 		title: `${escapeHTML(globalContent.site.author.fullName)} | Offensive Security Specialist`,
 		author: globalContent.site.author.fullName,
-		summary: dynamic.summary,
+		summary: dynamic.description.meta,
 		base_url: globalContent.site.base_url,
 		stylesheets: ['homepage'],
 		javascripts: ['navbar', 'homepage'],

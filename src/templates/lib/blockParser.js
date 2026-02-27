@@ -10,8 +10,11 @@ const { escapeHTML, ensureArray } = require('./utils');
  * @author Liam Skinner <me@liamskinner.co.uk>
  */
 const parseInline = (text = '') => {
-	const escaped = escapeHTML(text);
-	return escaped.replace(/`(.*?)`/g, '<code class="bold">$1</code>');
+	const safeText = escapeHTML(text);
+
+	return safeText
+		.replace(/`([^`]+)`/g, '<code class="bold">$1</code>')
+		.replace(/\*\*([^*]+)\*\*/g, '<strong class="bold">$1</strong>');
 };
 
 /**

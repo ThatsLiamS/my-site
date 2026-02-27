@@ -62,8 +62,8 @@ const renderWriteupCard = (writeup = {}) => {
 	const platformRaw = (writeup.platform || 'Other');
 	const platformSlug = getPlatformSlug(platformRaw);
 
-	const summary = writeup.summary
-		? escapeHTML(writeup.summary)
+	const summary = writeup.description.portfolio
+		? escapeHTML(writeup.description.portfolio)
 		: 'Click to view the full writeup and solution details.';
 
 	return `

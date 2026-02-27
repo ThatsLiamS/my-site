@@ -34,19 +34,23 @@ html {
 	letter-spacing: 1px;
 }
 
+.description-container {
+	padding-top: 20px;
+}
+
 /* Lists */
-.writeup-content ul, 
-.writeup-content ol {
+ul, 
+ol {
 	margin: 15px 0 20px 25px;
 	padding-left: 0;
 }
 
-.writeup-content li {
+li {
 	margin-bottom: 8px;
 	color: var(--text-main);
 }
 
-.writeup-content li::marker {
+li::marker {
 	color: var(--primary-accent);
 }
 

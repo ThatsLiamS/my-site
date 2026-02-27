@@ -25,6 +25,10 @@ const introTag = (dynamic) => {
 	const diffSlug = (dynamic.difficulty || 'medium').toLowerCase();
 	const formattedDiff = toTitleCase(diffSlug);
 
+	const description = ensureArray(dynamic.description.onpage)
+		.map(renderContentBlock)
+		.join('\n');
+
 	return `
 		<header class="card writeup-header difficulty-border-${diffSlug}">
 			<span class="category-tag">
@@ -42,6 +46,8 @@ const introTag = (dynamic) => {
 			</p>
 			
 			${tagsHTML && `<div class="tag-container">${tagsHTML}</div>`}
+
+			${description && `<div class="description-container">${description}</div>`}
 		</header>
 	`;
 };
@@ -79,7 +85,7 @@ const generateContent = (dynamic) => {
 	const headInfo = {
 		title: `Writeup: ${escapeHTML(dynamic.title)} | ${escapeHTML(globalContent.site.author.fullName)}`,
 		author: globalContent.site.author.fullName,
-		summary: dynamic.summary,
+		summary: dynamic.description.meta,
 		base_url: globalContent.site.base_url,
 		stylesheets: ['writeups'],
 		javascripts: ['navbar'],
