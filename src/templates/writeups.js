@@ -105,8 +105,8 @@ const generateContent = (dynamic) => {
 		'<div class="container">',
 		introTag(dynamic),
 		articleTag(dynamic),
-		footerTag(),
 		'</div>',
+		footerTag(),
 		'</body>',
 		'</html>',
 	]);

@@ -74,14 +74,6 @@ p {
 	padding: 0 20px;
 }
 
-footer {
-	text-align: center;
-	margin-top: 10px;
-	color: var(--text-gray);
-	font-size: 0.8rem;
-	padding-bottom: 40px;
-}
-
 /* Navigation */
 .navbar {
 	position: fixed; 
@@ -104,7 +96,8 @@ footer {
 	align-items: center; 
 }
 
-.nav-logo, .nav-links a { 
+.nav-logo,
+.nav-links a { 
 	font-family: var(--font-mono); 
 	color: var(--text-muted); 
 	text-decoration: none;
@@ -144,6 +137,75 @@ footer {
 	background-color: var(--primary-accent);
 	border-radius: 3px;
 	transition: all 0.3s ease-in-out;
+}
+
+/* --- Footer Styles --- */
+.site-footer {
+	margin-top: 60px;
+	padding: 40px 20px;
+	border-top: 1px dashed var(--border-color);
+	background-color: var(--bg-dark);
+}
+
+.footer-container {
+	max-width: 800px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+
+.footer-links {
+	display: flex;
+	gap: 25px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.footer-links a {
+	font-family: var(--font-mono);
+	color: var(--text-muted);
+	text-decoration: none;
+	font-size: 0.9rem;
+	transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+	color: var(--primary-accent);
+}
+
+.footer-meta {
+	text-align: center;
+	color: var(--text-gray);
+	font-size: 0.8rem;
+}
+
+.footer-meta p {
+	margin-bottom: 5px;
+}
+
+.terminal-exit {
+	font-family: var(--font-mono);
+	color: var(--text-muted);
+	margin-top: 10px;
+	opacity: 0.6;
+}
+
+/* Uses the existing prompt class logic from homepage.css */
+.terminal-exit .prompt {
+	color: var(--primary-accent);
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+/* Responsive */
+@media (width <= 650px) {
+	.footer-links {
+		gap: 15px;
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 /* UI Components */

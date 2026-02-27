@@ -59,7 +59,7 @@
 }
 
 .cursor {
-	animation: blink 1s step-end infinite;
+	animation: blink 2s step-end infinite;
 	background: var(--text-main);
 	color: transparent;
 	display: inline-block;

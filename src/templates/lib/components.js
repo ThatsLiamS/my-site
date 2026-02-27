@@ -136,9 +136,20 @@ const navTag = (information) => {
  * @author Liam Skinner <me@liamskinner.co.uk>
  */
 const footerTag = () => `
-	<footer>
-		&copy; ${new Date().getFullYear()} ${escapeHTML(globalContent.site.author.fullName)}.
-		All rights reserved.
+	<footer class="site-footer">
+		<div class="footer-container">
+			<div class="footer-links">
+				<a href="/">~/Home</a>
+				<a href="/portfolio">~/Portfolio</a>
+				<a href="/github" target="_blank" rel="noopener noreferrer">./GitHub</a>
+				<a href="/linkedin" target="_blank" rel="noopener noreferrer">./LinkedIn</a>
+			</div>
+			
+			<div class="footer-meta">
+				<p>© ${new Date().getFullYear()} ${escapeHTML(globalContent.site.author.fullName)}. All rights reserved.</p>
+				<p class="terminal-exit"><span class="prompt">$</span> exit</p>
+			</div>
+		</div>
 	</footer>
 `;
 
