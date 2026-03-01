@@ -162,10 +162,27 @@ const getAllWriteups = () => {
 		.filter(Boolean);
 };
 
+/**
+ * @function
+ * @summary Retrieves and parses all valid JSON project files from the content directory, excluding the template.
+ *
+ * @returns {Array<Object>} An array containing the parsed data of all valid projects.
+ *
+ * @author Liam Skinner <me@liamskinner.co.uk>
+ */
+const getAllProjects = () => {
+	const folderPath = path.resolve(__dirname, '../../content/projects/');
+	return fs.readdirSync(folderPath)
+		.filter(file => file.endsWith('.json') && file !== 'template.json')
+		.map(file => readJSON(path.join(folderPath, file)))
+		.filter(Boolean);
+};
+
 module.exports = {
 	saveToFile,
 	readJSON,
 	getAllWriteups,
+	getAllProjects,
 	createSitemap,
 	createRobots,
 };

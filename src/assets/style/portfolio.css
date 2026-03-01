@@ -3,7 +3,7 @@
 	max-width: 1000px; 
 }
 
-.writeups-grid {
+.grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 	gap: 1.5rem;
@@ -25,9 +25,14 @@
 	font-size: 2.5rem;
 	margin-bottom: 1.2rem;
 	color: var(--primary-accent);
+	scroll-margin-top: 45px;
 }
 
 /* Card Components */
+section.writeups{
+	margin-top: 72px;
+}
+
 .grid-card-link {
 	text-decoration: none !important;
 	color: inherit;
@@ -50,6 +55,12 @@
 	transform: translateY(-5px);
 	border-color: var(--primary-accent);
 	box-shadow: 0 8px 25px rgb(0 255 204 / 10%);
+}
+
+.grid-card-link:focus-visible .grid-card {
+	border-color: var(--primary-accent);
+	box-shadow: 0 8px 25px rgb(0 255 204 / 20%);
+	outline: none;
 }
 
 .card-top {
@@ -139,6 +150,11 @@
 
 .custom-select-trigger:hover {
 	border-color: var(--primary-accent);
+}
+
+.custom-select-trigger:focus-visible {
+	outline: 2px solid var(--primary-accent);
+	outline-offset: 2px;
 }
 
 .custom-options {

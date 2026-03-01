@@ -68,7 +68,7 @@ p {
 
 /* Layout */
 .container {
-	max-width: 800px;
+	max-width: 1000px;
 	margin: 0 auto;
 	margin-top: 40px;
 	padding: 0 20px;
@@ -243,17 +243,20 @@ p {
 	letter-spacing: 0.5px;
 }
 
-.difficulty-badge.easy {
+.difficulty-badge.easy,
+.difficulty-badge.active {
 	background: var(--diff-easy-bg);
 	color: var(--diff-easy-text);
 }
 
-.difficulty-badge.medium {
+.difficulty-badge.medium,
+.difficulty-badge.in-progress {
 	background: var(--diff-med-bg);
 	color: var(--diff-med-text);
 }
 
-.difficulty-badge.hard {
+.difficulty-badge.hard,
+.difficulty-badge.archived {
 	background: var(--diff-hard-bg);
 	color: var(--diff-hard-text);
 }
