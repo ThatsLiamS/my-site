@@ -70,6 +70,13 @@ const createSitemap = (destination) => {
 		'    </url>',
 	].join('\n');
 
+	const allProjects = getAllProjects()
+		.sort((a, b) => {
+			const rankA = a.ranking ?? 0;
+			const rankB = b.ranking ?? 0;
+			return rankB - rankA;
+		});
+
 	const allWriteups = getAllWriteups()
 		.sort((a, b) => {
 			const dateA = a.date || '';
@@ -84,6 +91,17 @@ const createSitemap = (destination) => {
 		'        <priority>0.8</priority>',
 		'    </url>',
 	].join('\n');
+
+	const projectXML = [];
+	for (const project of allProjects) {
+		projectXML.push([
+			'    <url>',
+			`        <loc>${baseUrl}/writeups/${project.id}</loc>`,
+			`        <lastmod>${project.date}</lastmod>`,
+			'        <priority>0.6</priority>',
+			'    </url>',
+		].join('\n'));
+	}
 
 	const writeupsXML = [];
 	for (const writeup of allWriteups) {
@@ -101,6 +119,7 @@ const createSitemap = (destination) => {
 		'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
 		domainXML,
 		portfolioXML,
+		projectXML.join('\n'),
 		writeupsXML.join('\n'),
 		'</urlset>',
 	].join('\n');
@@ -126,6 +145,7 @@ const createRobots = (destination) => {
 	const pathways = [
 		'Allow: /$',
 		'Allow: /portfolio$',
+		'Allow: /projects/',
 		'Allow: /writeups/',
 		'Allow: /assets/',
 		'Disallow: /',

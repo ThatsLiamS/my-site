@@ -1,6 +1,6 @@
 const globalContent = require('../content/global.json');
 
-const { escapeHTML, ensureArray, joinHTML, formatDate, toTitleCase } = require('./lib/utils');
+const { escapeHTML, ensureArray, joinHTML, formatDate, toTitleCase, mapStatusToDifficulty } = require('./lib/utils');
 const { saveToFile, getAllProjects, getAllWriteups } = require('./lib/fileUtils');
 const { headTag, navTag, footerTag } = require('./lib/components');
 
@@ -37,9 +37,8 @@ const renderTags = (tags) => {
 const renderProjectCard = (project = {}) => {
 	const tagsHTML = renderTags(project.tags);
 
-	const statusRaw = project.status || 'Unknown';
-	const status = escapeHTML(statusRaw);
-	const statusClass = statusRaw.toLowerCase().replace(/\s+/g, '-');
+	const status = escapeHTML(project.status || 'Unknown');
+	const statusClass = mapStatusToDifficulty(status);
 
 	const formattedDate = escapeHTML(project.date);
 

@@ -78,7 +78,8 @@ const minifyCode = async () => {
 	[
 		{ name: 'Homepage', handler: require('./templates/homepage.js') },
 		{ name: 'Not Found Page', handler: require('./templates/not-found.js') },
-		{ name: 'Portfolio Overview', handler: require('./templates/portfolio.js') },
+		{ name: 'Portfolio', handler: require('./templates/portfolio.js') },
+		{ name: 'Projects', handler: require('./templates/projects.js') },
 		{ name: 'Writeups', handler: require('./templates/writeups.js') },
 	]
 		.forEach(task => {

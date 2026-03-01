@@ -38,6 +38,10 @@ html {
 	padding-top: 20px;
 }
 
+span.difficulty-badge {
+	padding: 0;
+}
+
 /* Lists */
 .container ul, 
 .container ol {

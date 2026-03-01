@@ -108,6 +108,32 @@ const toTitleCase = (str) => {
 	);
 };
 
+/**
+ * @function
+ * @summary Normalizes a status string and maps it to a corresponding difficulty level.
+ *
+ * @param {string} status - The status value to evaluate (case-insensitive; spaces will be converted to hyphens).
+ * @returns {string} The mapped difficulty level ("easy", "medium", "hard"), or "unknown" if no match is found.
+ *
+ * @author Liam Skinner <me@liamskinner.co.uk>
+ */
+const mapStatusToDifficulty = (status) => {
+	const rawStatus = status.toLowerCase().replace(/\s+/g, '-');
+	switch (rawStatus) {
+	case 'active':
+		return 'easy';
+
+	case 'in-progress':
+		return 'medium';
+
+	case 'archived':
+		return 'hard';
+
+	default:
+		return 'unknown';
+	}
+};
+
 module.exports = {
 	escapeHTML,
 	ensureArray,
@@ -115,4 +141,5 @@ module.exports = {
 	resetAssets,
 	formatDate,
 	toTitleCase,
+	mapStatusToDifficulty,
 };

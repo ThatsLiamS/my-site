@@ -243,20 +243,17 @@ p {
 	letter-spacing: 0.5px;
 }
 
-.difficulty-badge.easy,
-.difficulty-badge.active {
+.difficulty-badge.easy {
 	background: var(--diff-easy-bg);
 	color: var(--diff-easy-text);
 }
 
-.difficulty-badge.medium,
-.difficulty-badge.in-progress {
+.difficulty-badge.medium {
 	background: var(--diff-med-bg);
 	color: var(--diff-med-text);
 }
 
-.difficulty-badge.hard,
-.difficulty-badge.archived {
+.difficulty-badge.hard {
 	background: var(--diff-hard-bg);
 	color: var(--diff-hard-text);
 }
