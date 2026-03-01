@@ -39,18 +39,18 @@ html {
 }
 
 /* Lists */
-ul, 
-ol {
+.container ul, 
+.container ol {
 	margin: 15px 0 20px 25px;
 	padding-left: 0;
 }
 
-li {
+.container li {
 	margin-bottom: 8px;
 	color: var(--text-main);
 }
 
-li::marker {
+.container li::marker {
 	color: var(--primary-accent);
 }
 

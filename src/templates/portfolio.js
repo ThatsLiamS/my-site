@@ -216,10 +216,19 @@ const renderWriteups = (writeups) => {
 		.map(renderWriteupCard)
 		.join('\n');
 
+	const emptyStateHtml = `
+		<article id="no-writeups-message" class="grid-card empty-state-card" style="display: none;">
+			<h2 class="card-title">404: No Writeups Found</h2>
+			<p class="card-excerpt">There are no writeups matching your current filter criteria. Try adjusting the platform or difficulty toggles above.</p>
+		</article>`;
+
 	return [
 		'<section class="writeups">',
 		renderWriteupsHeader(),
-		`<div class="grid">${cardsHtml}</div>`,
+		'<div class="grid">',
+		cardsHtml,
+		emptyStateHtml,
+		'</div>',
 		'</section>',
 	].join('\n');
 };

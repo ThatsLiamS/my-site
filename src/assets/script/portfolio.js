@@ -12,13 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/**
 	 * @function
-	 * @summary Evaluates the current filter state and updates the visibility of portfolio cards accordingly.
+	 * @summary Evaluates the current filter state and updates the visibility of portfolio cards accordingly. Displays an empty state message if no cards match.
 	 *
 	 * @returns {void} This function does not return a value.
 	 *
 	 * @author Liam Skinner <me@liamskinner.co.uk>
 	 */
 	const applyFilters = () => {
+		let visibleCount = 0;
+		const emptyStateMessage = document.getElementById('no-writeups-message');
+
 		cards.forEach(card => {
 			const cardPlatform = card.getAttribute('data-platform');
 			const cardDiff = card.getAttribute('data-difficulty');
@@ -28,11 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			if (matchPlatform && matchDiff) {
 				card.style.display = '';
+				visibleCount++;
 			}
 			else {
 				card.style.display = 'none';
 			}
 		});
+
+		if (emptyStateMessage) {
+			if (visibleCount === 0) {
+				emptyStateMessage.style.display = 'flex';
+			}
+			else {
+				emptyStateMessage.style.display = 'none';
+			}
+		}
+
 		requestAnimationFrame(adjustTags);
 	};
 

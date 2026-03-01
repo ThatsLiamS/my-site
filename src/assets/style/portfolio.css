@@ -89,6 +89,29 @@ section.writeups{
 	flex-grow: 1;
 }
 
+/* Empty State Card */
+.empty-state-card {
+	grid-column: 1 / -1;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	padding: 4rem 2rem;
+	border-style: dashed;
+	background: transparent;
+	box-shadow: none;
+}
+
+.empty-state-card:hover {
+	transform: none;
+	box-shadow: none;
+	border-color: var(--border-color);
+}
+
+.empty-state-card .card-title {
+	font-size: 1.5rem;
+	color: var(--text-muted);
+}
+
 /* Tags & Badges */
 .tag-container-compact {
 	display: flex;
