@@ -4,14 +4,14 @@ html {
 }
 
 /* Writeup Layout & Typography */
-.writeup-content {
+.content {
 	line-height: 1.8;
 	background: var(--card-bg);
 	border: 1px solid var(--border-color);
 	color: var(--text-main);
 }
 
-.writeup-content h2 {
+.content h2 {
 	margin-top: 40px;
 	border-bottom: 1px dashed var(--border-color);
 	padding-bottom: 10px;
@@ -19,7 +19,7 @@ html {
 	color: var(--primary-accent);
 }
 
-.writeup-content h3 {
+.content h3 {
 	color: var(--text-main);
 	margin-top: 25px;
 	font-family: var(--font-mono);
