@@ -1,6 +1,10 @@
 const path = require('path');
 const globalContent = require('../content/global.json');
 
+const { renderContentBlock } = require('./lib/blockParser');
+const { headTag, navTag, footerTag } = require('./lib/components');
+const { fetchStats, fillPlaceholders } = require('./lib/fetchStats');
+const { saveToFile, getAllProjects, getAllWriteups } = require('./lib/fileUtils');
 const {
 	escapeHTML,
 	ensureArray,
@@ -9,10 +13,6 @@ const {
 	mapStatusToDifficulty,
 	formatDate,
 } = require('./lib/utils');
-
-const { saveToFile, getAllProjects, getAllWriteups } = require('./lib/fileUtils');
-const { renderContentBlock } = require('./lib/blockParser');
-const { headTag, navTag, footerTag } = require('./lib/components');
 
 /**
  * @function
@@ -116,7 +116,7 @@ const generateContent = (data, type) => {
 		right: data.nav,
 	};
 
-	return joinHTML([
+	const html = joinHTML([
 		'<!DOCTYPE html>',
 		'<html lang="en-GB">',
 		headTag(headInfo),
@@ -130,38 +130,65 @@ const generateContent = (data, type) => {
 		'</body>',
 		'</html>',
 	]);
+
+	if (data.liveStats) {
+		return fillPlaceholders(html, data.liveStats);
+	}
+	return html;
 };
 
 /**
  * @function
- * @summary The main execution pipeline that loops through all JSON files to generate individual HTML pages.
+ * @summary Fetches live statistics (if configured), generates the HTML content, and saves it to the file system.
  *
- * @param {string} destination - The base target directory path.
+ * @param {Object} item - The individual data object (project or writeup) parsed from the JSON file.
+ * @param {string} type - The category classification of the item (e.g., 'project', 'writeup').
+ * @param {string} folder - The sub-directory name where the compiled HTML file will reside.
+ * @param {string} destination - The absolute or relative path to the root output folder.
  *
- * @returns {void}
+ * @returns {Promise<void>}
+ *
+ * @author Liam Skinner <me@liamskinner.co.uk>
  */
-module.exports = (destination) => {
+const processItem = async (item, type, folder, destination) => {
+	try {
+		if (item.externalData) {
+			item.liveStats = await fetchStats(item.externalData);
+		}
+
+		const html = generateContent(item, type);
+		saveToFile(html, path.join(destination, folder), item.id);
+	}
+	catch (fileError) {
+		console.error(`Error processing ${type} ID '${item?.id}':`, fileError.message);
+	}
+};
+
+/**
+ * @function
+ * @summary The primary execution pipeline. Iterates through all defined content types and processes each item sequentially to build the static site.
+ *
+ * @param {string} destination - The base directory path where the compiled static site should be generated.
+ *
+ * @returns {Promise<void>}
+ *
+ * @author Liam Skinner <me@liamskinner.co.uk>
+ */
+module.exports = async (destination) => {
 	const pipelines = [
 		{ type: 'project', getData: getAllProjects, folder: 'projects' },
 		{ type: 'writeup', getData: getAllWriteups, folder: 'writeups' },
 	];
 
-	pipelines.forEach(({ type, getData, folder }) => {
+	for (const { type, getData, folder } of pipelines) {
 		try {
 			const items = getData();
-
-			items.forEach(item => {
-				try {
-					const html = generateContent(item, type);
-					saveToFile(html, path.join(destination, folder), item.id);
-				}
-				catch (fileError) {
-					console.error(`Error processing ${type} ID '${item.id}':`, fileError.message);
-				}
-			});
+			await Promise.all(
+				items.map(item => processItem(item, type, folder, destination)),
+			);
 		}
 		catch (pipelineError) {
 			console.error(`CRITICAL Error loading data for ${type} pipeline:`, pipelineError.message);
 		}
-	});
+	}
 };

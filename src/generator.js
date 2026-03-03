@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const { globSync } = require('glob');
 const { minify: minifyJS } = require('terser');
@@ -6,6 +7,7 @@ const CleanCSS = require('clean-css');
 const { minify: minifyHTML } = require('html-minifier-terser');
 
 const { createSitemap, createRobots } = require('./templates/lib/fileUtils.js');
+const { resetAssets } = require('./templates/lib/utils.js');
 
 /**
  * @function @async
@@ -72,34 +74,39 @@ const minifyCode = async () => {
  * @author Liam Skinner <me@liamskinner.co.uk>
  */
 (async () => {
-	console.time('Build Time');
+	try {
+		console.time('Total Time');
+		console.time('Build Time');
 
-	await require('./templates/lib/utils.js').resetAssets();
-	[
-		{ name: 'Homepage', handler: require('./templates/homepage.js') },
-		{ name: 'Not Found Page', handler: require('./templates/not-found.js') },
-		{ name: 'Portfolio', handler: require('./templates/portfolio.js') },
-		{ name: 'Portfolio Content', handler: require('./templates/portfolioContent.js') },
-	]
-		.forEach(task => {
+		await resetAssets();
+		await createSitemap('./public/');
+		await createRobots('./public/');
+
+		const templatesDir = path.join(__dirname, 'templates');
+		const templateFiles = fs
+			.readdirSync(templatesDir)
+			.filter(file => file.endsWith('.js'));
+
+		for (const file of templateFiles) {
 			try {
-				console.log(`Building: ${task.name}`);
-				task.handler('./public/');
+				const handler = require(path.join(templatesDir, file));
+				await handler('./public/');
 			}
 			catch (error) {
-				console.error(
-					`Build failure in ${task.name}:`,
-					error.message,
-				);
+				console.error(`Build failure in ${file}:`, error.message);
 			}
-		});
-	await createSitemap('./public/');
-	await createRobots('./public/');
+		}
 
-	console.timeEnd('Build Time');
-	console.time('Minify Time');
+		console.timeEnd('Build Time');
 
-	await minifyCode();
+		console.time('Minify Time');
+		await minifyCode();
+		console.timeEnd('Minify Time');
 
-	console.timeEnd('Minify Time');
+		console.timeEnd('Total Time');
+	}
+	catch (fatalError) {
+		console.error('\nFatal Build Error:', fatalError.message);
+		process.exit(1);
+	}
 })();
